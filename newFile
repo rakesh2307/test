@@ -1,0 +1,856 @@
+    Policy Builder
+    
+    
+    <!DOCTYPE html>
+<!-- The DOCTYPE declaration above will set the     -->
+<!-- browser's rendering engine into                -->
+<!-- "Standards Mode". Replacing this declaration   -->
+<!-- with a "Quirks Mode" doctype is not supported. -->
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Cache-Control" content="no-store" />
+	
+    <style type="text/css">                                                      -->
+    html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td{margin:0;padding:0;}img,body,html{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}ol,ul {list-style:none;}caption,th {text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;}q:before,q:after{content:'';}
+
+   html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+/* remember to define focus styles! */
+:focus {
+	outline: 0;
+}
+/* remember to highlight inserts somehow! */
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+.clear{
+	clear: both;
+	margin-top: 20px;
+}
+.navbar-settings-header{
+    margin: 0px 10px 0px 10px;
+    line-height: 40px;
+    color: #FFF;
+    padding: 0px 0px 0px 0px;
+}
+.welcomeMsg{
+	outline: medium none;
+	color: white;
+	margin-right: 25px;
+	margin-top:3px;			
+	text-transform: none;
+	font: 12px "Arial Regular", Arial, sans-serif;
+}
+/*APP CONTROL*/
+#header-wrapper{
+	width: 100%;
+	height: 70px;
+}
+#header-wrapper.control-center{
+	background-position: top center;
+	/* new */background-repeat: repeat-x;
+	background-image: url(%URL%/cc-background.jpg);
+}
+#header-wrapper.policy-builder{
+	background-position: 0px 0px;
+	background-repeat: repeat-x;
+	background-image: url(%URL%/pb-background.jpg);
+}
+#header-wrapper.portal-admin{
+	background-position: 0px 0px;
+	background-repeat: repeat-x;
+	background-image: url(%URL%/pa-background.jpg);
+}
+#logo h1{
+	float: left;
+	margin-left: 25px;
+	margin-top: 10px;
+	display: block;
+	width: 284px;
+	height: 45px;
+}
+.control-center-logo h1{
+	background: url(%URL%/cc-logo.png) no-repeat 0 0;
+	text-indent: -99999px;
+}
+.policy-builder-logo h1{
+	background: url(%URL%/pb-logo.png) no-repeat 0 0;
+	text-indent: -99999px;
+}
+.portal-admin-logo h1{
+	background: url(%URL%/pa-logo.png) no-repeat 0 0;
+	text-indent: -99999px;
+}
+ul#app-control{
+	float: right;
+	margin-right: 25px;
+	text-transform: uppercase;
+	font: 10px "Arial Regular", Arial, sans-serif;
+}
+ul#app-control li{
+	/* new */height: 22px;
+	float: left;
+	margin-left: 1px;
+}
+ul#app-control li a{
+	display: block;
+	color: #fff;
+	text-decoration: none;
+	padding: 5px;
+	/* new */height: 18px;
+}
+ul#app-control li a:hover{
+	color: #525252;
+}
+ul#app-control li.selected{
+	background-color: #C1CD23;
+	/*background: url(%URL%/app-control-selected.png) no-repeat center bottom;*/
+	padding-bottom: 3px;
+}
+ul#app-control li.selected a{
+	/* new */background-image: url("%URL%/app-control-selected-C1CD23.png");
+	/* new */background-repeat: no-repeat;
+	/* new */background-position: center 25px;
+	/* new */background-color: transparent;
+	color: #666666;
+}
+ul#app-control li.help a{
+	width: 21px;
+	height: 21px;
+	padding: 0;
+	background: url(%URL%/app-control-help.png) no-repeat 0 0;
+	text-indent: -9999px;
+}
+ul#app-control li.help a:hover{
+	background-position: 0 -21px;
+}
+/*TABBED NAV*/
+ul#app-nav{
+	float: right;
+	clear: right;
+	margin-right: 25px;
+	margin-top:20px;
+}
+ul#app-nav li{
+	float: left;
+	margin-left: 2px;	
+}
+ul#app-nav li a{
+	display: block;
+	text-decoration: none;
+	background-color: #eee;
+	border: 1px solid #bbb;
+	color: #aaa;
+	text-transform: uppercase;
+	font: 12px "Arial Regular", Arial, sans-serif;
+	width: 130px;
+	text-align: center;
+	padding-top: 4px;
+	padding-bottom: 5px;
+}
+ul#app-nav li a:hover{
+	background-color: #fff;
+	border-bottom: none;
+	color: #525252;
+	padding-bottom: 6px;
+}
+ul#app-nav li.selected a{
+	background-color: #fff;
+	border-bottom: none;
+	color: #525252;
+	padding-top: 9px;
+	padding-bottom: 5px;
+	margin-top: -4px;
+}
+
+#content{
+	font-family: "Arial Regular", Arial, sans-serif;
+}
+#form-wrapper{
+	width: 425px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 150px;
+	padding: 20px;
+	background-color: #efefef;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+#form-wrapper h2{
+	font-weight: normal;
+	font-style: normal;
+	font-size: 14px;
+	color: #666666;
+	margin-bottom: 20px;
+}
+#form-wrapper .title{
+	font-weight: normal;
+	font-style: normal;
+	font-size: 14px;
+	color: #666666;
+	margin-bottom: 5px;
+	text-align: center;
+}
+#form-wrapper .status{
+	font-weight: bold;
+	font-style: normal;
+	font-size: 12px;
+	color: #666666;
+	margin-top: 2px;
+	text-align: center;
+}
+#form-wrapper .status-success{
+	color: #04B404;
+}
+#form-wrapper .status-error{
+	color: #FF0000;
+}
+#form-wrapper .status-progress{
+	color: #DF7401;
+}
+
+#form-wrapper form{
+	font-size: 11px;
+	margin-right: auto;
+	margin-left: auto;
+	width: 370px;
+}
+#form-wrapper label, input#username, input#password{
+	float: left;
+	clear: both;
+	color: #666666;
+}
+#form-wrapper input#username, input#password{
+	margin-top: 5px;
+	margin-bottom: 10px;
+	width: 350px;
+	border-style: none;
+	padding: 5px;
+}
+#form-wrapper #login, #form-wrapper #reset{
+	float: left;
+	height: 30px;
+	border-style: none;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	color: #ffffff;
+	font: 15px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	cursor: pointer;
+	margin-top: 10px;
+} 
+#form-wrapper #login{
+	background: url(%URL%/login-button-background.jpg) repeat-x 0 0;
+	width: 125px;
+	margin-right: 10px;
+}
+#form-wrapper #login:hover{
+	background: url(%URL%/login-button-background.jpg) repeat-x 0 -30px;
+}
+#form-wrapper #reset{
+	background: url(%URL%/reset-button-background.jpg) repeat-x 0 0;
+	width: 105px;
+}
+#form-wrapper #reset:hover{
+	background: url(%URL%/reset-button-background.jpg) repeat-x 0 -30px;
+}
+.help-logo{
+	margin-top: -1px;
+	height: 22px;
+}
+</style>
+
+    <!--                                           -->
+    <!-- Any title is fine                         -->
+    <!--                                           -->
+    <title>Applications</title>
+    
+    <!--                                           -->
+    <!-- This script loads your compiled module.   -->
+    <!-- If you add any GWT meta tags, they must   -->
+    <!-- be added before this line.                -->
+    <!--                                           -->
+    <!-- <script type="text/javascript" language="javascript" src="AppNav/AppNav.nocache.js"></script> -->
+    
+  </head>
+
+  <!--                                           -->
+  <!-- The body can have arbitrary html, or      -->
+  <!-- you can leave the body empty if you want  -->
+  <!-- to create a completely dynamic UI.        -->
+  <!--                                           -->
+  <body style="margin: 0px">
+
+    <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
+    <noscript>
+      <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+        Your web browser must have JavaScript enabled
+        in order for this application to display correctly.
+      </div>
+    </noscript>
+   	<script type="text/javascript">
+	function updateSelectedApp(nav) {
+		var allApps = document.getElementById('app-nav').getElementsByTagName('li');
+		for(var i = 0, len = allApps.length; i < len; ++i) {
+			allApps[i].className=''
+		}
+		document.getElementById(nav).className='selected';
+	}
+	</script>
+	<div id="navigation"></div>
+	<div id="application"></div>
+
+     <!-- CONTROL CENTER NAV  - DO NOT CHANGE -->
+     <div id="header-wrapper" class="policy-builder">
+     	<div id="logo" class="policy-builder-logo">
+	     <h1>Broadhop</h1>
+	</div>
+	<ul id="app-control">
+         <!--  <li><a href="#">Control Center</a></li> -->
+         <li class="welcomeMsg"> %SITENAME% </li>
+         <li class="welcomeMsg"> SVN URL: %REPOSITORY% </li>
+         <li class="welcomeMsg"> SVN Revision: %REVISION% </li>
+		 <li class="welcomeMsg">Welcome, %USERNAME%  </li>
+		 <li class="welcomeMsg">(%USERROLE%)  </li>
+           <li class="selected"><a href="#">Policy Builder</a></li>
+           <li class="welcomeMsg">
+           		<img src="%URL%/pb-help.png" onerror="this.style.display='none'" class="help-logo" onclick="window.open('../../pb-resources/index.html','helpWindow','width=600,height=450,left=380,top=150,scrollbars=yes')"></img>
+           	</li>
+        <!--    <li><a href="#">Portal Admin</a></li> -->
+           <li class="selected"><a href="#">Logout</a></li> 
+       <!--    <li class="help"><a href="#">Help</a></li> -->
+        </ul>
+        <ul id="app-nav">
+        %NAV_LIST%
+          <!-- <li class="selected"><a href="#">Nav Item 1</a></li>
+           <li><a href="#">Nav Item 2</a></li> -->
+        </ul>
+     </div>
+
+
+  </body>
+</html>
+
+
+
+WebTheme
+
+
+/*******************************************************************************
+ * Copyright (c) 2007, 2011 compeople AG and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    compeople AG - initial API and implementation
+ *******************************************************************************/
+
+package com.broadhop.client.ui.framework.internal.navigation.lnf;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.rap.rwt.RWT;
+import org.eclipse.riena.navigation.ISubApplicationNode;
+import org.eclipse.riena.navigation.ui.swt.component.SubApplicationItem;
+import org.eclipse.riena.navigation.ui.swt.lnf.renderer.SubApplicationSwitcherRenderer;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.browser.BrowserFunction;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.widgets.Canvas;
+import org.osgi.framework.Bundle;
+
+import com.broadhop.client.ui.framework.Activator;
+import com.broadhop.client.ui.framework.ICommitListener;
+import com.broadhop.client.ui.framework.SessionSingleton;
+import com.broadhop.model.policy.Repository;
+import com.broadhop.utility.ServerProfile;
+
+@SuppressWarnings("restriction")
+public class WebThemeHeaderRenderer extends SubApplicationSwitcherRenderer implements ICommitListener {
+
+	private Browser browser;
+	private List<SubApplicationItem> items;
+	private String template;
+	private String lastTemplate = null;
+	public String currentRevision="";
+	private GC gc;
+	private boolean isTesting = false;
+	private boolean isTestingReadOnly = false;
+	private static final int COOKIE_MAX_AGE_SEC = 3600 * 24 * 90;
+	
+
+	//only for testing
+	public WebThemeHeaderRenderer(boolean isTesting, boolean readOnly) {
+		this.isTesting = isTesting;
+		isTestingReadOnly = readOnly;
+	}
+	 	
+	public WebThemeHeaderRenderer() {
+		template = loadTemplate("/theme/policybuilder.html"); //$NON-NLS-1$
+		final String baseURL = getBaseURL();
+		template = template.replace("%URL%", baseURL); //$NON-NLS-1$
+		String branding = System.getProperty("branding-theme", "broadhop");
+		if(!"broadhop".equals(branding))
+		{ 
+			template = template.replace("logo.png", branding+".png"); //$NON-NLS-1$
+		}
+
+	}
+
+	@Override
+	public void paint(final GC gc, final Object value) {
+		this.gc=gc;
+		getRevision();
+		String replace = "";
+		List<SubApplicationItem> visibleItems = getVisibleItems();
+		for (int j = 0; j < visibleItems.size(); j++) {
+			SubApplicationItem i = visibleItems.get(j);
+			ISubApplicationNode sub = i.getSubApplicationNode();
+			String className = "";
+			if(j==0)
+			{
+				className=" class='selected' ";
+			}
+			replace+="<li "+className+"id='subApp+"+j+"+'><a href='#' onClick=\"updateSelectedApp('subApp+"+j+"+');activateSubApplication('"+sub.getNodeId().getTypeId()+"');return false;\">"+sub.getLabel()+"</a></li>";
+			 
+		}
+		String newTemplate = template.replace("%NAV_LIST%", replace); //$NON-NLS-1$
+		if (null == browser) {
+			final Canvas parent = (Canvas) value;
+			parent.setLayout(new FillLayout());
+			browser = new Browser(parent, SWT.None);
+			new SubApplicationSwitchFunction(browser, "activateSubApplication"); //$NON-NLS-1$
+		}
+		
+		Repository repository = SessionSingleton.getInstance().getSelectedRepository();
+		ServerProfile serverUtilityObj = new ServerProfile();
+		if(!serverUtilityObj.getHostname().isEmpty()) {
+			newTemplate = newTemplate.replace("%SITENAME%", "Hostname: "+serverUtilityObj.getHostname());
+		}else{
+			newTemplate = newTemplate.replace("%SITENAME%", "");
+		}
+		if(repository!=null && repository.getDefaultUsername()!=null){
+			newTemplate = newTemplate.replace("%USERNAME%", repository.getDefaultUsername());	
+		}
+		else{
+			newTemplate = newTemplate.replace("%USERNAME%", "");
+		}
+		if(repository!=null && repository.getUrl()!=null){
+			newTemplate = newTemplate.replace("%REPOSITORY%", repository.getUrl());
+			newTemplate = newTemplate.replace("%REVISION%", currentRevision);
+		}
+		else{
+			newTemplate = newTemplate.replace("%REPOSITORY%", "Local Directory");
+			newTemplate = newTemplate.replace("%REVISION%", "N/A");
+		}
+		 
+		newTemplate = newTemplate.replace("%USERROLE%", getUserRole());
+
+		if(!newTemplate.equals(lastTemplate))
+		{ 
+			lastTemplate = newTemplate;
+			browser.setText(newTemplate);
+		}
+		if (browser.isDisposed()) {
+			return;
+		}
+	}
+
+	public String getUserRole() {
+		//display user role 
+				Boolean isReadOnly = false;
+				if(!isTesting)
+				{
+					isReadOnly = SessionSingleton.getInstance().isReadOnly();
+				}
+				else
+				{
+					isReadOnly = isTestingReadOnly;	
+				}
+				String userRole = "";
+				
+				if(!isReadOnly) {
+					userRole = "ADMIN";
+				} else {
+					userRole = "READONLY";
+				}
+			
+			return userRole;	
+		
+	}
+
+	private void initPublishListener() {
+		List<ICommitListener> commitListeners = SessionSingleton.getInstance().getCommitListeners();
+		if(!commitListeners.contains(this))
+		{
+			commitListeners.add(this);
+		}
+
+	}
+
+	private void getRevision() {
+		initPublishListener();
+		if(currentRevision==null || currentRevision.isEmpty())
+		{
+			String location = SessionSingleton.getInstance().getBroadhopResourceSet().getRepositoryLocation();
+			
+			StringBuffer output = new StringBuffer();
+
+			Process p;
+			try {
+
+				p = Runtime.getRuntime().exec("svn info "+location);
+				p.waitFor();
+				BufferedReader reader =
+						new BufferedReader(new InputStreamReader(p.getInputStream()));
+
+				String line = "";                    
+				while ((line = reader.readLine())!= null) {
+					output.append(line + "\n");
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			final String info = output.toString();
+
+			if(info!=null && !info.isEmpty())
+			{
+				String lastChangedRev = "Last Changed Rev: ";
+				currentRevision = info.substring(info.indexOf(lastChangedRev)+lastChangedRev.length(), info.indexOf("Last Changed Date:"));
+			}
+		}
+	}
+
+	public String getBaseURL() {
+		// Protocol, ip & port
+		final ServletContext sc = RWT.getRequest().getSession().getServletContext();
+		String sessionid = RWT.getRequest().getSession().getId();
+		
+		RWT.getResponse().setHeader("SET-COOKIE", "JSESSIONID=" + sessionid + "; HttpOnly");
+		RWT.getResponse().addHeader("SET-COOKIE", "settingStore="+RWT.getSettingStore().getId()+"; HttpOnly"+";Max-Age="+COOKIE_MAX_AGE_SEC);
+		final String realPath = sc.getRealPath("/"); //$NON-NLS-1$
+		final HttpServletRequest request = RWT.getRequest();
+		final String protocol = "http://"; //$NON-NLS-1$
+		final String ip = request.getLocalAddr();
+		final int port = request.getLocalPort();
+		final String URL = protocol + ip + ":" + port; //$NON-NLS-1$
+		String webAppName = ""; //$NON-NLS-1$
+
+		if (realPath == null) { // Start application locally within Eclipse
+								// (Windows)
+			return "";
+		} // Start application on a server (Apache Tomcat or so)
+		webAppName = sc.getContextPath();		
+		return "" + webAppName+"test";
+	}
+
+	@Override
+	public Rectangle getBounds() {
+		final Rectangle bounds = super.getBounds();
+		return new Rectangle(0, 0, bounds.width, bounds.height);
+	}
+
+	private class SubApplicationSwitchFunction extends BrowserFunction {
+		public SubApplicationSwitchFunction(final Browser browser, final String name) {
+			super(browser, name);
+		}
+
+		@Override
+		public Object function(final Object[] arguments) {
+			final String param = (String) arguments[0];
+			
+			for(SubApplicationItem i : getVisibleItems())
+			{
+				final ISubApplicationNode subApplicationNode = i.getSubApplicationNode();
+				if(param.equals(subApplicationNode.getNodeId().getTypeId()))
+				{
+					subApplicationNode.activate();	
+					break;
+				}
+			}
+			
+			return null;
+		}
+	}
+
+	
+	private List<SubApplicationItem> getVisibleItems() {
+		final List<SubApplicationItem> visibleItems = new ArrayList<SubApplicationItem>();
+
+		for (final SubApplicationItem item : getItems()) {
+			if (item.getSubApplicationNode().getMarkers().size()==0) {
+				visibleItems.add(item);
+			}
+		}
+		return visibleItems;
+	}
+
+	/**
+	 * @param items
+	 *            the items to set
+	 */
+	@Override
+	public void setItems(final List<SubApplicationItem> items) {
+		this.items = items;
+	}
+
+	/**
+	 * @return the items
+	 */
+	private List<SubApplicationItem> getItems() {
+		if (items == null) {
+			items = new ArrayList<SubApplicationItem>();
+		}
+		return items;
+	}
+
+	private File getTemplate(final String templateName) {
+		if(templateName==null){
+			return null;
+		}
+		Bundle bundle = null;
+		
+		for (final Bundle frag : Platform.getFragments(Activator.getDefault().getBundle())) {
+			if ("com.broadhop.client.ui.framework.webtheme".equals(frag //$NON-NLS-1$
+					.getSymbolicName())) {
+				bundle = frag;
+				break;
+			}
+		}
+		if(bundle==null)
+		{
+			return null;
+		}
+		final URL fileURL = bundle.getEntry(templateName);
+		URL realUrl;
+		try {
+			realUrl = FileLocator.resolve(fileURL);
+			final File file = new File(realUrl.toString().replaceAll("file:", "").replaceAll("%20", " "));
+			return file;
+		} catch (final IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private String loadTemplate(final String templateName) {
+		FileReader fileReader = null;
+		try {
+			final File template = getTemplate(templateName);
+			fileReader = new FileReader(template);
+		} catch (final FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		finally
+		{
+			if(fileReader==null)
+			{
+				return "";
+			}
+		}
+
+		final BufferedReader br = new BufferedReader(fileReader);
+		final StringBuilder bob = new StringBuilder();
+		String line = null;
+		try {
+			while ((line = br.readLine()) != null) {
+				bob.append(line).append("\n"); //$NON-NLS-1$
+			}
+		} catch (final IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				br.close();
+			} catch (final IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return bob.toString();
+	}
+
+
+	@Override
+	public void commitOccurred(long ret) {
+		currentRevision = ret+"";
+		
+		SessionSingleton.getInstance().getDisplay().asyncExec(new Runnable() {
+			
+			@Override
+			public void run() {
+				paint(gc, null);
+			}
+		});;
+		
+	}
+}
+
+
+package com.broadhop.client.ui.framework.handlers;
+
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.eclipse.core.commands.AbstractHandler;
+import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.riena.navigation.ApplicationNodeManager;
+import org.eclipse.riena.navigation.INavigationNode;
+import org.eclipse.riena.navigation.INavigationNodeController;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+
+import com.broadhop.client.ui.framework.SessionSingleton;
+import com.broadhop.client.ui.framework.navigation.BroadhopModelController;
+import com.broadhop.client.ui.framework.navigation.nodes.BroadhopModuleGroupNode;
+
+/*
+ * Handles 'exit'
+ */
+public class ExitHandler extends AbstractHandler {
+	
+	public static final Logger logger = Logger.getLogger(ExitHandler.class );
+
+	/**
+	 * @see org.eclipse.core.commands.AbstractHandler#execute(org.eclipse.core.commands.ExecutionEvent)
+	 */
+	public Object execute(ExecutionEvent event) throws ExecutionException {
+		INavigationNode<?> selectedNode = ApplicationNodeManager.getApplicationNode().getNavigationProcessor().getSelectedNode();
+		INavigationNodeController node = selectedNode.getNavigationNodeController() ;
+		String user = SessionSingleton.getInstance().getRepoUsername();
+		//collapsing the tree before exiting the application to avoid CPU load
+		recursiveCollapse(selectedNode);
+		if(node instanceof BroadhopModelController)
+		{ 
+			if(SessionSingleton.getInstance().getAutoSaveFlag()){
+				((BroadhopModelController)node).save();
+		}else{
+			if(((BroadhopModelController)node).isSaveNeeded()){
+				Shell shell = Display.getDefault().getActiveShell();
+	        	if(shell!=null){
+					boolean ret = MessageDialog.openQuestion(shell, "Are you sure?", "Do you want to save this object?\n(You can turn this message off in your Preferences by turning on Expert Mode)");
+	        	    if(!ret)
+	        	    {
+	        	    	while(((BroadhopModelController)node).isSaveNeeded()){
+	        	    		((BroadhopModelController)node).undo();
+	        	    	}
+	        	    	cancelPressed();
+	        	    }else{
+	        	    	while(((BroadhopModelController)node).isSaveNeeded()){
+	        	    		((BroadhopModelController)node).save();
+	        	    	}
+	        	    }
+	        	}
+			}				
+		}
+		}
+		String username = null;
+		if (null != user) {			
+			logger.info("Invalidating session when user - "+username+" exits PB.");
+		}
+				
+		SwitchRepositoryHandler.restart();
+		if (null != user) {
+			logger.debug("User - "+user+" logged out successfully from Policy Builder.");
+		}else {
+			logger.warn("Unable to fetch username from SessionSingleton instance. User logged out successfully from Policy Builder.");
+		}
+		return null;
+	}
+	/**
+	 * Get the root and collapse the complete tree
+	 */
+	private void recursiveCollapse(INavigationNode<?> selectedNode) {
+		INavigationNode root = getRoot(selectedNode);
+		collapse(root);
+	}
+	private void collapse(INavigationNode root) {
+		List<INavigationNode> children = root.getChildren();
+		if(root.isExpanded() && !children.isEmpty()) {
+			logger.debug("Collapsing Node : " + root.getLabel());
+			root.setExpanded(false);
+		}
+		
+		for(final INavigationNode child : children) {
+			collapse(child);
+		}
+	}
+	private INavigationNode getRoot(INavigationNode<?> selectedNode) {
+		
+		for(;;) {
+			logger.debug("Label of Selected Node : " + selectedNode.getLabel());
+			if(selectedNode.getParent() instanceof BroadhopModuleGroupNode) {
+				return selectedNode;
+			} else {
+				selectedNode = selectedNode.getParent();
+			}
+		}
+	}
+	/**
+	 * This method executes when the cancel button of the save dialog box is clicked.
+	 * 
+	 * @return MessageDialog.CANCEL Returns the standard code "1" meaning the window was cancelled.
+	 */
+	private Object cancelPressed() {
+		return MessageDialog.CANCEL;
+		
+	}
+	
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+	}
